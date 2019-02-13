@@ -72,9 +72,9 @@ namespace vdm.Services
         public decimal? TotalPrice;
         public decimal? TotalPriceWithPromo;
         public OrderTypeEnum DocumentType;
-        public List<CustomerCallOrderLineGoodPackage> goodPackages;
+        public List<CustomerCallOrderLineGoodPackage> GoodPackages;
         public List<CustomerCallOrderLinePromotion> Lines;
-        public List<DiscountEvcItemStatuteData> discountEvcItemStatuteData;
+        public List<DiscountEvcItemStatuteData> DiscountEvcItemStatuteData;
         public List<CustomerCallOrderLinePromotion> LinesWithPromo;
     }
 

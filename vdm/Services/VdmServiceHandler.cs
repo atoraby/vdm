@@ -5,6 +5,7 @@ using Android.OS;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog;
+using RuleEngine;
 using SQLite.Net;
 using System;
 using System.Collections.Generic;
@@ -88,6 +89,12 @@ namespace vdm.Services
             if (json == null || json.Length == 0)
                 return;
             var callData = JsonConvert.DeserializeObject<CallData>(json);
+            var calcData = new DiscountV2.Entity.Internal.CalcData();
+
+            var ch = new DiscountCalculatorHandler();
+            ch.Calculate(callData);
+
+
             Bundle bundle = new Bundle();
             bundle.PutString("CallData", JsonConvert.SerializeObject(callData, new JsonSerializerSettings
             {
