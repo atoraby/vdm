@@ -6,6 +6,7 @@ using Android.Content;
 using Android.Database;
 using Android.Database.Sqlite;
 using DiscountV2.Entity.MasterData;
+using DiscountV2.Entity.SDS.Evc;
 using NLog;
 
 namespace vdm.Base
@@ -53,12 +54,28 @@ namespace vdm.Base
         {
             return new List<Type>
             {
-                typeof(CPrice),
+                typeof(SaleItm),
+                typeof(OrderPrize),
+                typeof(DisAcc),
+                typeof(StockGoods),
                 typeof(Customer),
+                typeof(SaleHdr),
+                typeof(Package),
+                typeof(GoodsMainSubType),
                 typeof(CustomerGroup),
+                typeof(DisSalePrizePackage),
                 typeof(CustomerMainSubType),
+                typeof(GoodsGroup),
+                typeof(EvcItemStatute),
                 typeof(Goods),
+                typeof(CPrice),
                 typeof(Discount),
+                typeof(EvcPrize),
+                typeof(EvcHeader),
+                typeof(Price),
+                typeof(EvcPrizePackage),
+                typeof(FreeReason),
+                typeof(DiscountGoodsPackageItem),
 
             };
         }

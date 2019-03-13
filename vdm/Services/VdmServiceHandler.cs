@@ -2,6 +2,7 @@
 using Android.Database;
 using Android.Database.Sqlite;
 using Android.OS;
+using DiscountV2.Entity.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog;
@@ -88,8 +89,7 @@ namespace vdm.Services
             string json = msg.Data.GetString("CallData");
             if (json == null || json.Length == 0)
                 return;
-            var callData = JsonConvert.DeserializeObject<CallData>(json);
-            var calcData = new DiscountV2.Entity.Internal.CalcData();
+            var callData = JsonConvert.DeserializeObject<CalcData>(json);
 
             var ch = new DiscountCalculatorHandler();
             ch.Calculate(callData);

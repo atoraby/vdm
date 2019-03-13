@@ -49,9 +49,8 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscountV2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DiscountV2.dll</HintPath>
+    <Reference Include="DiscountV2">
+      <HintPath>Dll\Discount\V1.0.0.0\DiscountV2.dll</HintPath>
     </Reference>
     <Reference Include="LinqKit.Core">
       <HintPath>..\LinqKit.Core.dll</HintPath>
