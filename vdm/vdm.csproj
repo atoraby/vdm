@@ -49,8 +49,9 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscountV2">
-      <HintPath>Dll\Discount\V1.0.0.0\DiscountV2.dll</HintPath>
+    <Reference Include="DiscountV2, Version=5.1.5.76, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DiscountV2.dll</HintPath>
     </Reference>
     <Reference Include="LinqKit.Core">
       <HintPath>..\LinqKit.Core.dll</HintPath>
@@ -72,7 +73,6 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\CallData.cs" />
     <Compile Include="Services\VdmService.cs" />
     <Compile Include="Services\VdmServiceHandler.cs" />
   </ItemGroup>
