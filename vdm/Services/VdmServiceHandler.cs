@@ -3,6 +3,8 @@ using Android.Database;
 using Android.Database.Sqlite;
 using Android.OS;
 using DiscountV2.Entity.Internal;
+using DiscountV2.Entity.MasterData;
+using DiscountV2.Entity.SDS.Evc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog;
@@ -86,17 +88,20 @@ namespace vdm.Services
             if (requestId == null)
                 return;
 
-            string json = msg.Data.GetString("CallData");
+            string json = msg.Data.GetString("CalcData");
             if (json == null || json.Length == 0)
                 return;
-            var callData = JsonConvert.DeserializeObject<CalcData>(json);
 
+
+            var calcData = JsonConvert.DeserializeObject<CalcData>(json);
+            fillInitData(calcData);
             var ch = new DiscountCalculatorHandler();
-            ch.Calculate(callData);
+            calcData.AdvanceConditionHelper = new AdvancedConditionHelper();
+            ch.Calculate(calcData);
 
 
             Bundle bundle = new Bundle();
-            bundle.PutString("CallData", JsonConvert.SerializeObject(callData, new JsonSerializerSettings
+            bundle.PutString("CalcData", JsonConvert.SerializeObject(cleanCalcData(calcData), new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             }));
@@ -104,6 +109,116 @@ namespace vdm.Services
             bundle.PutString("SessionId", sessionId);
             replyMsg.Data = bundle;
         }
+
+        private CalcData cleanCalcData(CalcData calcData)
+        {
+            calcData.SaleItms = new List<SaleItm>();
+            calcData.OrderPrizes = new List<OrderPrize>();
+            calcData.DisAccs = new List<DisAcc>();
+            calcData.StockGoods = new List<StockGoods>();
+            calcData.Customers = new List<Customer>();
+            calcData.SaleHdrs = new List<SaleHdr>();
+            calcData.Packages = new List<Package>();
+            calcData.GoodsMainSubTypes = new List<GoodsMainSubType>();
+            calcData.CustomerGroups = new List<CustomerGroup>();
+            calcData.DisSalePrizePackages = new List<DisSalePrizePackage>();
+            calcData.CustomerMainSubTypes = new List<CustomerMainSubType>();
+            calcData.Goods = new List<Goods>();
+            calcData.CPrices = new List<CPrice>();
+            calcData.Discounts = new List<Discount>();
+            calcData.EvcPrize = new List<EvcPrize>();
+            calcData.Prices = new List<Price>();
+            calcData.EvcPrizePackage = new List<EvcPrizePackage>();
+            calcData.FreeReasons = new List<FreeReason>();
+            calcData.DiscountGoodsPackageItems = new List<DiscountGoodsPackageItem>();
+            return calcData;
+        }
+
+        private void fillInitData(CalcData calcData)
+        {
+            var connection = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), _db.GetDatabasePath());
+            foreach(var item in connection.Table<SaleItm>())
+            {
+                calcData.SaleItms.Add(item);
+            }
+            foreach (var item in connection.Table<OrderPrize>())
+            {
+                calcData.OrderPrizes.Add(item);
+            }
+            foreach (var item in connection.Table<DisAcc>())
+            {
+                calcData.DisAccs.Add(item);
+            }
+            foreach (var item in connection.Table<StockGoods>())
+            {
+                calcData.StockGoods.Add(item);
+            }
+            foreach (var item in connection.Table<Customer>())
+            {
+                calcData.Customers.Add(item);
+            }
+            foreach (var item in connection.Table<SaleHdr>())
+            {
+                calcData.SaleHdrs.Add(item);
+            }
+            foreach (var item in connection.Table<Package>())
+            {
+                calcData.Packages.Add(item);
+            }
+            foreach (var item in connection.Table<GoodsMainSubType>())
+            {
+                calcData.GoodsMainSubTypes.Add(item);
+            }
+            foreach (var item in connection.Table<CustomerGroup>())
+            {
+                calcData.CustomerGroups.Add(item);
+            }
+            foreach (var item in connection.Table<DisSalePrizePackage>())
+            {
+                calcData.DisSalePrizePackages.Add(item);
+            }
+            foreach (var item in connection.Table<CustomerMainSubType>())
+            {
+                calcData.CustomerMainSubTypes.Add(item);
+            }
+            foreach (var item in connection.Table<GoodsGroup>())
+            {
+                calcData.GoodsGroups.Add(item);
+            }
+            foreach (var item in connection.Table<Goods>())
+            {
+                calcData.Goods.Add(item);
+            }
+            foreach (var item in connection.Table<CPrice>())
+            {
+                calcData.CPrices.Add(item);
+            }
+            foreach (var item in connection.Table<Discount>())
+            {
+                calcData.Discounts.Add(item);
+            }
+            foreach (var item in connection.Table<EvcPrize>())
+            {
+                calcData.EvcPrize.Add(item);
+            }
+            foreach (var item in connection.Table<Price>())
+            {
+                calcData.Prices.Add(item);
+            }
+            foreach (var item in connection.Table<EvcPrizePackage>())
+            {
+                calcData.EvcPrizePackage.Add(item);
+            }
+            foreach (var item in connection.Table<FreeReason>())
+            {
+                calcData.FreeReasons.Add(item);
+            }
+            foreach (var item in connection.Table<DiscountGoodsPackageItem>())
+            {
+                calcData.DiscountGoodsPackageItems.Add(item);
+            }
+        }
+
         private void ProcessAtachment(Message msg, Message replyMsg)
         {
             string appId = msg.Data.GetString("AppId", null);

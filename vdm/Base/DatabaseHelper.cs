@@ -66,12 +66,10 @@ namespace vdm.Base
                 typeof(DisSalePrizePackage),
                 typeof(CustomerMainSubType),
                 typeof(GoodsGroup),
-                typeof(EvcItemStatute),
                 typeof(Goods),
                 typeof(CPrice),
                 typeof(Discount),
                 typeof(EvcPrize),
-                typeof(EvcHeader),
                 typeof(Price),
                 typeof(EvcPrizePackage),
                 typeof(FreeReason),
@@ -100,6 +98,10 @@ namespace vdm.Base
             }
         }
 
+        public string GetDatabasePath()
+        {
+            return _context.GetDatabasePath(DatabaseName).AbsolutePath;
+        }
         public Byte[] GetByteArray()
         {
             var file = _context.GetDatabasePath(DatabaseName);
