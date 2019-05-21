@@ -137,82 +137,102 @@ namespace vdm.Services
         private void fillInitData(CalcData calcData)
         {
             var connection = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), _db.GetDatabasePath());
+            calcData.SaleItms = new List<SaleItm>();
             foreach(var item in connection.Table<SaleItm>())
             {
                 calcData.SaleItms.Add(item);
             }
+            calcData.OrderPrizes = new List<OrderPrize>();
             foreach (var item in connection.Table<OrderPrize>())
             {
                 calcData.OrderPrizes.Add(item);
             }
+            calcData.DisAccs = new List<DisAcc>();
             foreach (var item in connection.Table<DisAcc>())
             {
                 calcData.DisAccs.Add(item);
             }
+            calcData.StockGoods = new List<StockGoods>();
             foreach (var item in connection.Table<StockGoods>())
             {
                 calcData.StockGoods.Add(item);
             }
+            calcData.Customers = new List<Customer>();
             foreach (var item in connection.Table<Customer>())
             {
                 calcData.Customers.Add(item);
             }
+            calcData.SaleHdrs = new List<SaleHdr>();
             foreach (var item in connection.Table<SaleHdr>())
             {
                 calcData.SaleHdrs.Add(item);
             }
+            calcData.Packages = new List<Package>();
             foreach (var item in connection.Table<Package>())
             {
                 calcData.Packages.Add(item);
             }
+            calcData.GoodsMainSubTypes = new List<GoodsMainSubType>();
             foreach (var item in connection.Table<GoodsMainSubType>())
             {
                 calcData.GoodsMainSubTypes.Add(item);
             }
+            calcData.CustomerGroups = new List<CustomerGroup>();
             foreach (var item in connection.Table<CustomerGroup>())
             {
                 calcData.CustomerGroups.Add(item);
             }
+            calcData.DisSalePrizePackages = new List<DisSalePrizePackage>();
             foreach (var item in connection.Table<DisSalePrizePackage>())
             {
                 calcData.DisSalePrizePackages.Add(item);
             }
+            calcData.CustomerMainSubTypes = new List<CustomerMainSubType>();
             foreach (var item in connection.Table<CustomerMainSubType>())
             {
                 calcData.CustomerMainSubTypes.Add(item);
             }
+            calcData.GoodsGroups = new List<GoodsGroup>();
             foreach (var item in connection.Table<GoodsGroup>())
             {
                 calcData.GoodsGroups.Add(item);
             }
+            calcData.Goods = new List<Goods>();
             foreach (var item in connection.Table<Goods>())
             {
                 calcData.Goods.Add(item);
             }
+            calcData.CPrices = new List<CPrice>();
             foreach (var item in connection.Table<CPrice>())
             {
                 calcData.CPrices.Add(item);
             }
+            calcData.Discounts = new List<Discount>();
             foreach (var item in connection.Table<Discount>())
             {
                 calcData.Discounts.Add(item);
             }
+            calcData.EvcPrize = new List<EvcPrize>();
             foreach (var item in connection.Table<EvcPrize>())
             {
                 calcData.EvcPrize.Add(item);
             }
+            calcData.Prices = new List<Price>();
             foreach (var item in connection.Table<Price>())
             {
                 calcData.Prices.Add(item);
             }
+            calcData.EvcPrizePackage = new List<EvcPrizePackage>();
             foreach (var item in connection.Table<EvcPrizePackage>())
             {
                 calcData.EvcPrizePackage.Add(item);
             }
+            calcData.FreeReasons = new List<FreeReason>();
             foreach (var item in connection.Table<FreeReason>())
             {
                 calcData.FreeReasons.Add(item);
             }
+            calcData.DiscountGoodsPackageItems = new List<DiscountGoodsPackageItem>();
             foreach (var item in connection.Table<DiscountGoodsPackageItem>())
             {
                 calcData.DiscountGoodsPackageItems.Add(item);
