@@ -58,7 +58,7 @@ namespace vdm.Base
                 typeof(OrderPrize),
                 typeof(DisAcc),
                 typeof(StockGoods),
-                typeof(Customer),
+                //typeof(Customer),
                 typeof(SaleHdr),
                 typeof(Package),
                 typeof(GoodsMainSubType),

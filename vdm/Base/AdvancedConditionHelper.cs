@@ -18,12 +18,12 @@ namespace vdm.Base
     {
         public override CalcData CalcPeriodicDiscount(CalcData data)
         {
-            throw new NotImplementedException();
+            return data;
         }
 
         public override CalcData ValidateAdvanceCondition(CalcData data)
         {
-            throw new NotImplementedException();
+            return data;
         }
     }
 }

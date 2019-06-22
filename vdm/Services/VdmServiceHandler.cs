@@ -97,14 +97,14 @@ namespace vdm.Services
             fillInitData(calcData);
             var ch = new DiscountCalculatorHandler();
             calcData.AdvanceConditionHelper = new AdvancedConditionHelper();
-            ch.Calculate(calcData);
+            var result = ch.Calculate(calcData);
 
-
-            Bundle bundle = new Bundle();
-            bundle.PutString("CalcData", JsonConvert.SerializeObject(cleanCalcData(calcData), new JsonSerializerSettings
+            var jb = JsonConvert.SerializeObject(cleanCalcData(result), new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
-            }));
+            });
+            Bundle bundle = new Bundle();
+            bundle.PutString("CalcData", jb);
             bundle.PutString("RequestId", requestId);
             bundle.PutString("SessionId", sessionId);
             replyMsg.Data = bundle;
@@ -116,7 +116,7 @@ namespace vdm.Services
             calcData.OrderPrizes = new List<OrderPrize>();
             calcData.DisAccs = new List<DisAcc>();
             calcData.StockGoods = new List<StockGoods>();
-            calcData.Customers = new List<Customer>();
+            //calcData.Customers = new List<Customer>();
             calcData.SaleHdrs = new List<SaleHdr>();
             calcData.Packages = new List<Package>();
             calcData.GoodsMainSubTypes = new List<GoodsMainSubType>();
@@ -138,7 +138,7 @@ namespace vdm.Services
         {
             var connection = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), _db.GetDatabasePath());
             calcData.SaleItms = new List<SaleItm>();
-            foreach(var item in connection.Table<SaleItm>())
+            foreach (var item in connection.Table<SaleItm>())
             {
                 calcData.SaleItms.Add(item);
             }
@@ -157,11 +157,11 @@ namespace vdm.Services
             {
                 calcData.StockGoods.Add(item);
             }
-            calcData.Customers = new List<Customer>();
-            foreach (var item in connection.Table<Customer>())
-            {
-                calcData.Customers.Add(item);
-            }
+            //calcData.Customers = new List<Customer>();
+            //foreach (var item in connection.Table<Customer>())
+            //{
+            //    calcData.Customers.Add(item);
+            //}
             calcData.SaleHdrs = new List<SaleHdr>();
             foreach (var item in connection.Table<SaleHdr>())
             {
